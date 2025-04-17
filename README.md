@@ -3,7 +3,7 @@
 A modern, responsive portfolio and resume web application built with React, TypeScript, and Tailwind CSS. Showcase your education, experience, skills, certifications, and more in a visually appealing format.
 
 ##Demo
-<img src='https://i.imgur.com/SYdqbbf.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/github-pratik/Pratik_resv2/blob/main/resume2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Features
 - Responsive design with dark/light theme toggle
