@@ -6,6 +6,7 @@ import Experience from './pages/Experience';
 import Certifications from './pages/Certifications';
 import Education from './pages/Education';
 import Skills from './pages/Skills';
+
 export function App() {
   return <BrowserRouter>
       <Routes>
@@ -15,6 +16,7 @@ export function App() {
           <Route path="certifications" element={<Certifications />} />
           <Route path="education" element={<Education />} />
           <Route path="skills" element={<Skills />} />
+
         </Route>
       </Routes>
     </BrowserRouter>;

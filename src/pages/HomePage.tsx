@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react'; // Import useState
 import { ArrowRightIcon, DownloadIcon, BriefcaseIcon, AwardIcon, GraduationCapIcon, CodeIcon, GithubIcon, LinkedinIcon, MailIcon, RocketIcon, HeartIcon, CoffeeIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false); // Add state for modal visibility
+  const resumeUrl = "https://drive.google.com/file/d/1OTGe_nAvhWCpMQYXIhQn-fiXpaJyKobY/view?usp=sharing";
+  // Add a function to handle opening the modal
+  const openModal = () => setIsModalOpen(true);
+  // Add a function to handle closing the modal
+  const closeModal = () => setIsModalOpen(false);
+
   return <div className="w-full bg-black">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center text-center"> 
+      <section className="relative min-h-screen flex items-center justify-center text-center">
         <div className="absolute inset-0 bg-black"></div>
         <div className="absolute inset-0 bg-grid-white-dots opacity-10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -19,22 +26,30 @@ const HomePage = () => {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
-                  Hello I'm Chirag Ferwani!
+                  Hello I'm Pratik Patil!
                 </h1>
                 <h2 className="text-2xl md:text-3xl text-white mt-4">
-                  <span className="text-white">Aspiring Software Developer</span> <span className="text-gray-400">from Pune, Maharashtra.</span>
+                  <span className="text-white">Aspiring Software Developer</span> <span className="text-gray-400">from Fairfax, VA.</span>
                 </h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto mt-4">
-                  Specialist in C++, Java, Dart, Python and Web Dev.
+                  Specialist in Javascript, Java, Python and Innovation.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4 justify-center mt-8">
-                <a href="#" className="inline-flex items-center px-6 py-3 bg-white text-black font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+                {/* Change anchor to button and add onClick handler */}
+                <button 
+                  onClick={openModal} 
+                  className="inline-flex items-center px-6 py-3 bg-white text-black font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                >
                   Resume
-                </a>
-                <a href="#" className="inline-flex items-center px-6 py-3 border border-white bg-transparent text-white font-medium rounded-full hover:bg-white hover:text-black transform hover:-translate-y-0.5 transition-all duration-200">
+                </button>
+                <a href="https://www.linkedin.com/in/pshpatil/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 border border-white bg-transparent text-white font-medium rounded-full hover:bg-white hover:text-black transform hover:-translate-y-0.5 transition-all duration-200">
                   <LinkedinIcon className="h-5 w-5 mr-2" />
                   LinkedIn
+                </a>
+                <a href="https://github.com/github-pratik" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 border border-white bg-transparent text-white font-medium rounded-full hover:bg-white hover:text-black transform hover:-translate-y-0.5 transition-all duration-200">
+                  <GithubIcon className="h-5 w-5 mr-2" />
+                  Github
                 </a>
               </div>
             </div>
@@ -143,6 +158,43 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Resume Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="bg-black rounded-lg shadow-xl w-full max-w-4xl h-[90vh] flex flex-col border border-gray-800">
+            <div className="flex justify-between items-center p-4 border-b border-gray-800">
+              <h3 className="text-xl font-semibold text-white">Resume - Pratik Patil</h3>
+              <div>
+                <a 
+                  href={resumeUrl} 
+                  download="Pratik_Patil_Resume.pdf" 
+                  className="inline-flex items-center px-4 py-2 mr-2 bg-green-500 text-white font-medium rounded-full hover:bg-green-600 transition-colors duration-200"
+                >
+                  <DownloadIcon className="h-5 w-5 mr-2" />
+                  Download
+                </a>
+                <button 
+                  onClick={closeModal} 
+                  className="px-4 py-2 bg-gray-800 text-white font-medium rounded-full hover:bg-gray-700 transition-colors duration-200"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+            <div className="flex-grow p-4 overflow-hidden">
+              {/* Embed PDF using iframe */}
+              <iframe 
+                src={resumeUrl.replace('/view?usp=sharing', '/preview')} 
+                className="w-full h-full border-0"
+                title="Resume PDF"
+              >
+                Your browser does not support PDFs. Please download the PDF to view it.
+              </iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </div>;
 };
 

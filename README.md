@@ -3,7 +3,8 @@
 A modern, responsive portfolio and resume web application built with React, TypeScript, and Tailwind CSS. Showcase your education, experience, skills, certifications, and more in a visually appealing format.
 
 ## Features
-- Responsive design with dark mode support
+- Responsive design with dark/light theme toggle
+- Interactive resume preview modal
 - Modular React components for easy customization
 - Sections for Education, Experience, Skills, Certifications, and more
 - Styled with Tailwind CSS for rapid UI development

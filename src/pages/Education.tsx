@@ -60,20 +60,20 @@ const EducationItem = ({
 const Education = () => {
   const educationItems = [{
     degree: 'Master of Science in Computer Science',
-    institution: 'University of Technology',
-    location: 'Boston, MA',
-    period: 'Sep 2021 - Present',
-    description: 'Specializing in Artificial Intelligence and Machine Learning with a focus on Natural Language Processing.',
-    courses: ['Advanced Machine Learning Algorithms', 'Deep Learning and Neural Networks', 'Natural Language Processing', 'Computer Vision', 'Big Data Analytics'],
-    achievements: ["Dean's List for academic excellence (2021-2022)", 'Graduate Research Scholarship recipient', 'Teaching Assistant for Introduction to Machine Learning course']
+    institution: 'George Mason University',
+    location: 'Fairfax, VA',
+    period: 'Aug 2024 - Dec 2026',
+    description: 'Focusing on Artificial Intelligence, Machine Learning, Secure Software, and Cloud Computing.',
+    courses: ['Machine Learning', 'Artificial Intelligence', 'Secure Software Design', 'Algorithms', 'Database Systems'],
+    achievements: ['Current GPA: 3.78/4.00']
   }, {
-    degree: 'Bachelor of Science in Computer Science',
-    institution: 'State University',
-    location: 'Chicago, IL',
-    period: 'Sep 2017 - May 2021',
-    description: 'Graduated with honors, focusing on software engineering and data structures.',
-    courses: ['Data Structures and Algorithms', 'Database Systems', 'Web Development', 'Operating Systems', 'Software Engineering'],
-    achievements: ['Graduated Cum Laude with 3.8 GPA', "Undergraduate Research Project: 'Efficient Algorithms for Graph Analysis'", 'President of Computer Science Student Association (2019-2020)']
+    degree: 'Bachelor of Technology in Computer Engineering',
+    institution: 'Pimpri Chinchwad College of Engineering, University of Pune',
+    location: 'Pune, India',
+    period: 'Aug 2020 - May 2024',
+    description: 'Graduated with a strong foundation in computing, systems, and software engineering.',
+    courses: ['Operating Systems', 'Cloud Computing', 'AI & ML', 'Data Structures', 'Software Testing', 'Algorithms'],
+    achievements: ['CGPA: 8.51/10.00', 'Published research paper in Springer ICSCS 2023 on image analysis using computer vision']
   }];
   return (
     <div className="bg-white dark:bg-black min-h-screen py-12">
@@ -92,24 +92,24 @@ const Education = () => {
           <div className="space-y-4">
             <div className="border-l-4 border-green-500 dark:border-green-400 pl-4 py-2">
               <h3 className="font-bold text-gray-900 dark:text-white">
-                Summer School on AI Ethics
+              WEB102 | Intermediate Web Development
               </h3>
-              <p className="text-green-500 dark:text-green-400">Stanford University (Online)</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">July 2022</p>
+              <p className="text-green-500 dark:text-green-400">CodePath Org (Online)</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Feb 2025</p>
             </div>
             <div className="border-l-4 border-green-500 dark:border-green-400 pl-4 py-2">
               <h3 className="font-bold text-gray-900 dark:text-white">
-                Web Development Bootcamp
+              AI&ML Virtual Internship 
               </h3>
-              <p className="text-green-500 dark:text-green-400">Tech Innovators</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Summer 2020</p>
+              <p className="text-green-500 dark:text-green-400">EduSkills Foundation</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Jul 2023</p>
             </div>
             <div className="border-l-4 border-green-500 dark:border-green-400 pl-4 py-2">
               <h3 className="font-bold text-gray-900 dark:text-white">
-                Data Science Workshop Series
+              Cloud Engineering Track and Data Science & Machine Learning
               </h3>
-              <p className="text-green-500 dark:text-green-400">DataCamp</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Spring 2020</p>
+              <p className="text-green-500 dark:text-green-400">Google Cloud</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Dec 2021</p>
             </div>
           </div>
         </div>

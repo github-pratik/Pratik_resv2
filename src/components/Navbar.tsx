@@ -15,7 +15,7 @@ const Navbar = () => {
     { name: 'Experience', path: '/experience' },
     { name: 'Certificates', path: '/Certifications' },
     { name: 'Education', path: '/Education' },
-    { name: 'Skills', path: '/Skills' },
+    { name: 'Skills', path: '/Skills' }
   ];
 
   // TODO: Implement dark mode toggle functionality
@@ -31,7 +31,7 @@ const Navbar = () => {
           {/* Logo/Brand */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-white">Chirag Ferwani</span>
+              <span className="text-xl font-bold text-white">Pratik Patil</span>
             </Link>
           </div>
 
