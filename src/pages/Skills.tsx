@@ -253,16 +253,16 @@ const Skills = () => {
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Languages</h2>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-medium text-gray-700 dark:text-gray-300">English</span>
+                <span className="font-medium text-gray-700 dark:text-gray-300">JavaScipt</span>
                 <span className="text-green-500 dark:text-green-400">Native</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-medium text-gray-700 dark:text-gray-300">Spanish</span>
+                <span className="font-medium text-gray-700 dark:text-gray-300">Java</span>
                 <span className="text-green-500 dark:text-green-400">Intermediate</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-medium text-gray-700 dark:text-gray-300">French</span>
-                <span className="text-green-500 dark:text-green-400">Basic</span>
+                <span className="font-medium text-gray-700 dark:text-gray-300">Python</span>
+                <span className="text-green-500 dark:text-green-400">Intermediate</span>
               </div>
             </div>
           </div>
