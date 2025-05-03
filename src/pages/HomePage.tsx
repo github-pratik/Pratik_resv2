@@ -1,14 +1,19 @@
 import React, { useState } from 'react'; // Import useState
-import { ArrowRightIcon, DownloadIcon, BriefcaseIcon, AwardIcon, GraduationCapIcon, CodeIcon, GithubIcon, LinkedinIcon, MailIcon, RocketIcon, HeartIcon, CoffeeIcon } from 'lucide-react';
+import { ArrowRightIcon, DownloadIcon, BriefcaseIcon, AwardIcon, GraduationCapIcon, CodeIcon, GithubIcon, LinkedinIcon, MailIcon, RocketIcon, HeartIcon, CoffeeIcon, PhoneIcon, MapPinIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // Add state for modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for resume modal visibility
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false); // State for contact modal visibility
   const resumeUrl = "https://drive.google.com/file/d/1OTGe_nAvhWCpMQYXIhQn-fiXpaJyKobY/view?usp=sharing";
-  // Add a function to handle opening the modal
+  
+  // Functions to handle resume modal
   const openModal = () => setIsModalOpen(true);
-  // Add a function to handle closing the modal
   const closeModal = () => setIsModalOpen(false);
+  
+  // Functions to handle contact modal
+  const openContactModal = () => setIsContactModalOpen(true);
+  const closeContactModal = () => setIsContactModalOpen(false);
 
   return <div className="w-full bg-black">
       {/* Hero Section */}
@@ -159,6 +164,116 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* About Section with Grid Background */}
+      <section className="relative py-20 bg-black">
+        <div className="absolute inset-0 bg-grid-white-dots opacity-10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="space-y-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+              Turning coffee into code & ideas into reality
+            </h2>
+            <p className="text-2xl md:text-3xl text-white">
+              Let's Get Shit Done!
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center mt-8">
+              <button 
+                onClick={openContactModal} 
+                className="inline-flex items-center px-6 py-3 bg-white text-black font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+              >
+                Contact Me
+              </button>
+              <a 
+                href="https://www.linkedin.com/in/pshpatil/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center px-6 py-3 border border-white bg-transparent text-white font-medium rounded-full hover:bg-white hover:text-black transform hover:-translate-y-0.5 transition-all duration-200"
+              >
+                <LinkedinIcon className="h-5 w-5 mr-2" />
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Modal */}
+      {isContactModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="bg-black rounded-lg shadow-xl w-full max-w-md flex flex-col border border-gray-800">
+            <div className="flex justify-between items-center p-4 border-b border-gray-800">
+              <h3 className="text-xl font-semibold text-white">Contact Information</h3>
+              <button 
+                onClick={closeContactModal} 
+                className="px-4 py-2 bg-gray-800 text-white font-medium rounded-full hover:bg-gray-700 transition-colors duration-200"
+              >
+                Close
+              </button>
+            </div>
+            <div className="p-6 space-y-6">
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
+                  <MailIcon className="h-5 w-5 text-green-500" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Email</p>
+                  <a href="mailto:pratik.patil@example.com" className="text-white hover:text-green-500 transition-colors">
+                    p.pshpatil@gmail.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
+                  <PhoneIcon className="h-5 w-5 text-green-500" />
+                </div>
+               
+                <div>
+                  <p className="text-sm text-gray-400">Phone</p>
+                  <a href="tel:+1234567890" className="text-white hover:text-green-500 transition-colors">
+                    (202) 577-3965
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
+                  <MapPinIcon className="h-5 w-5 text-green-500" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Location</p>
+                  <p className="text-white">
+                    Fairfax, VA
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
+                  <LinkedinIcon className="h-5 w-5 text-green-500" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">LinkedIn</p>
+                  <a href="https://www.linkedin.com/in/pshpatil/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-500 transition-colors">
+                    linkedin.com/in/pshpatil
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
+                  <GithubIcon className="h-5 w-5 text-green-500" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">GitHub</p>
+                  <a href="https://github.com/github-pratik" target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-500 transition-colors">
+                    github.com/github-pratik
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Resume Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
