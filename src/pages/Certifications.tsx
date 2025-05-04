@@ -41,7 +41,15 @@ const CertificationCard = ({
   );
 };
 const Certifications = () => {
-  const certifications = [{
+  const certifications = [
+    {
+      title: 'WEB102 | Intermediate Web Development',
+      issuer: 'CodePath Org',
+      date: 'May 2025',
+      image: 'https://5340557.fs1.hubspotusercontent-na1.net/hub/5340557/hubfs/custom-video-thumbnails/120232%20-%20What%20is%20CodePath%20Sizzle%20Reel%20(Miami-Focused)%20-%20V8_V1%20(1)-thumb-1.jpeg?length=1920',
+      credentialId: '',
+      url: 'https://drive.google.com/file/d/1WORm0VHcf9UyQPJZ2KU7dKGYBFTRpz_r/view?usp=sharing'
+    },{
     title: 'AWS Certified Cloud Practitioner',
     issuer: 'Amazon Web Services',
     date: 'Jan 2025',
