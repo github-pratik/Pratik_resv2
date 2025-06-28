@@ -172,31 +172,70 @@ const Skills = () => {
   const conciseSkills = technicalSkills.slice(0, conciseCount);
   const skillsToShow = showAllSkills ? technicalSkills : conciseSkills;
 
+
   const projects = [{
-    title: 'SmartSplit - AI-Powered Bill Splitting App',
-    description: 'A smart bill-splitting app built for GDG BuildAthon that uses OCR and Firebase to scan receipts, assign items to people, and calculate shared costs with tax and tip. Real-time updates and an intuitive UI make group payments seamless.',
-    image: 'https://raw.githubusercontent.com/github-pratik/smafrt_splitter_GDG/main/Demo1.gif',
-    tags: ['React', 'TypeScript', 'TailwindCSS', 'Firebase', 'OCR', 'Lucide React', 'Vite'],
-    link: 'https://github.com/github-pratik/smafrt_splitter_GDG'
-  }, {
+      title: 'SmartSplit - AI-Powered Bill Splitting App',
+      description: 'A smart bill-splitting app built for GDG BuildAthon that uses OCR and Firebase to scan receipts, assign items to people, and calculate shared costs with tax and tip. Real-time updates and an intuitive UI make group payments seamless.',
+      image: 'https://raw.githubusercontent.com/github-pratik/smafrt_splitter_GDG/main/Demo1.gif',
+      tags: ['React', 'TypeScript', 'TailwindCSS', 'Firebase', 'OCR', 'Lucide React', 'Vite'],
+      link: 'https://github.com/github-pratik/smafrt_splitter_GDG'
+    }, {
+      title: 'Smart Clipboard Manager - Chrome Extension',
+      description: 'A privacy-first, manual clipboard manager Chrome extension with a minimal, modern UI and local AI features. Features include smart tagging, categorization, summarization, and semantic search—all running locally for privacy.',
+      image: 'https://i.imgur.com/JmSn4.giff', // You may want to add a specific demo image
+      tags: ['JavaScript', 'Chrome Extension', 'AI', 'Privacy', 'Local Storage', 'Manifest V3'],
+      link: 'https://github.com/github-pratik/Smart-Clipboard-Manager'
+    }, {
+      title: 'Edulearn Bolt - AI-Powered Learning Platform',
+      description: 'A community-driven, open-source platform empowering educators and students with accessible learning resources, optional premium content, and AI-powered features. Built for Bolt.new Hackathon 2025.',
+      image: 'https://i.imgur.com/Zp4at4.gif', // You may want to add a specific demo image
+      tags: ['TypeScript', 'Supabase', 'AI Chat', 'Voice AI', 'OpenRouter', 'RevenueCat'],
+      link: 'https://github.com/github-pratik/Edulearn_Bolt'
+    }, {
       title: 'Instant Market - GMU Student Marketplace',
       description: 'A campus-focused e-commerce platform for GMU students to buy and sell essentials like textbooks and electronics. Features include user roles, AI-powered recommendations, receipt generation, and sales analytics dashboard.',
       image: 'https://i.imgur.com/JmSbSn4.gif',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap 5', 'LocalStorage', 'SessionStorage', 'AI Recommendation'],
       link: 'https://github.com/github-pratik/GMU_Instant_Market'
+    },
+    {
+      title: 'Real-Time Speech Analytics Dashboard',
+      description: 'An advanced dashboard for real-time speech analysis with sentiment detection, emotion recognition, and speech-to-text capabilities. Provides comprehensive analytics and insights.',
+      image: 'https://i.imgur.com/YyTqE1.gif', // You may want to add a specific demo image
+      tags: ['React', 'WebRTC', 'Speech Recognition', 'Sentiment Analysis', 'Real-time Analytics'],
+      link: 'https://github.com/github-pratik/Real-Time-Speech-Analytics-Dashboard'
     }, {
+      title: 'Homework Grader - AI-Powered Grading System',
+      description: 'An intelligent homework grading system that uses AI to automatically evaluate student submissions, provide feedback, and generate detailed reports for educators.',
+      image: 'https://imgur.com/A6jvDV.gif', // You may want to add a specific demo image
+      tags: ['Python', 'AI/ML', 'Natural Language Processing', 'Education Tech', 'Automation'],
+      link: 'https://github.com/github-pratik/HomeworkGrader'
+    }, {
+      title: 'UI Coding Assistant - AI-Powered Dev Tool',
+      description: 'A prototype tool for GMU SWE632 that assists UI developers in generating components, analyzing design/code, and checking accessibility. Includes simulated AI suggestions, performance evaluation, and WCAG testing.',
+      image: 'https://i.imgur.com/YxyTqE1.gif',
+      tags: ['JavaScript', 'HTML5', 'CSS3', 'jQuery', 'Bootstrap 5', 'Jest', 'Selenium', 'Prism.js'],
+      link: 'https://github.com/github-pratik/UICoding_assistant'
+    }, {
+      title: 'Java Oracle University DB - GMU GUI',
+      description: 'A comprehensive Java application with Oracle database integration for university management. Features a modern GUI for managing student records, courses, and academic data.',
+      image: 'https://github.com/github-pratik/Wb_Scraping_and_Classification/assets/90708235/14e0b9fd-9f83-4081-b431-22a6254c66cf', // You may want to add a specific demo image
+      tags: ['Java', 'Oracle Database', 'Swing GUI', 'JDBC', 'Database Design'],
+      link: 'https://github.com/github-pratik/Java_Oracle_UniversityDB_GMU_GUI'
+    }, {
+      title: 'Crewmate - Database Management with Supabase',
+      description: 'A modern database management application built with Supabase for efficient data handling, real-time updates, and scalable backend operations.',
+      image: 'https://i.imgur.com/JmSSn4.gif', // You may want to add a specific demo image
+      tags: ['Supabase', 'React', 'TypeScript', 'Database Management', 'Real-time'],
+      link: 'https://github.com/github-pratik/Crewmate_DBSupabase'
+    }, 
+    {
       title: 'Pokémon Dashboard - React + PokéAPI',
       description: 'An interactive React-based dashboard that fetches and displays data from the PokéAPI. Users can search, filter, and view detailed Pokémon info with charts highlighting unique data insights.',
       image: 'https://i.imgur.com/gZp4at4.gif',
       tags: ['React', 'PokéAPI', 'Data Visualization', 'Charts', 'Routing'],
       link: 'https://github.com/github-pratik/CodePath_Dasboard_part-2'
-    },{
-      title: 'UI Code Assistant - AI-Powered UI Dev Tool',
-      description: 'A prototype tool for GMU SWE632 that assists UI developers in generating components, analyzing design/code, and checking accessibility. Includes simulated AI suggestions, performance evaluation, and WCAG testing.',
-      image: 'https://i.imgur.com/YxyTqE1.gif',
-      tags: ['JavaScript', 'HTML5', 'CSS3', 'jQuery', 'Bootstrap 5', 'Jest', 'Selenium', 'Prism.js'],
-      link: 'https://github.com/github-pratik/UI_Coding_Assistant'
-    },  {
+    }, {
       title: "Trippin' on Cats - Cat Discovery App",
       description: "A fun and interactive cat breed explorer that fetches random cats via API. Users can ban unwanted traits, keep a visual history of seen cats, and enjoy a sleek glass-style UI with responsive design.",
       image: "https://imgur.com/A6jJvDV.gif",
@@ -208,8 +247,9 @@ const Skills = () => {
       image: 'https://github.com/github-pratik/Web_Scraping_and_Classification/assets/90708235/14e0b9fd-9f83-4081-b431-22a6254c66cf',
       tags: ['Python', 'BeautifulSoup', 'Scikit-learn', 'KNN', 'SVM', 'Pandas', 'NLTK'],
       link: 'https://github.com/github-pratik/Web_Scraping_and_Classification'
-    }    
-    ];
+    }];
+  
+  // ... existing code ...;
   return (
     <div className="bg-white dark:bg-black min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
