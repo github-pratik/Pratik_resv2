@@ -1,337 +1,517 @@
 import React, { useState } from 'react';
-import { CodeIcon, DatabaseIcon, ServerIcon, GlobeIcon, BrainIcon, GitBranchIcon, MonitorIcon, BoxIcon, CloudIcon, SmartphoneIcon, BookOpenIcon, LineChartIcon, LayersIcon, PencilIcon, CommandIcon, KeyboardIcon, SettingsIcon, HashIcon, FileCodeIcon, MailWarningIcon, Magnet, ProjectorIcon, PanelsTopLeftIcon } from 'lucide-react';
-const SkillIcon = ({
-  icon: Icon,
-  name
-}) => {
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Box,
+  Chip,
+  Button,
+  Avatar,
+  useTheme,
+  useMediaQuery,
+  Tabs,
+  Tab,
+  Divider,
+  Link,
+  Grid,
+} from '@mui/material';
+import {
+  Code as CodeIcon,
+  Storage as DatabaseIcon,
+  Dns as ServerIcon,
+  Language as GlobeIcon,
+  Psychology as BrainIcon,
+  AccountTree as GitBranchIcon,
+  Monitor as MonitorIcon,
+  Inventory as BoxIcon,
+  Cloud as CloudIcon,
+  PhoneAndroid as SmartphoneIcon,
+  MenuBook as BookOpenIcon,
+  ShowChart as LineChartIcon,
+  Layers as LayersIcon,
+  Edit as PencilIcon,
+  Terminal as CommandIcon,
+  Keyboard as KeyboardIcon,
+  Settings as SettingsIcon,
+  Tag as HashIcon,
+  Description as FileCodeIcon,
+  Warning as MailWarningIcon,
+  ViewInAr as ProjectorIcon,
+  Dashboard as PanelsTopLeftIcon,
+  OpenInNew as OpenInNewIcon,
+} from '@mui/icons-material';
+import { motion } from 'framer-motion';
+
+interface SkillIconProps {
+  icon: React.ComponentType<any>;
+  name: string;
+}
+
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  link?: string;
+}
+
+const SkillIcon = ({ icon: Icon, name }: SkillIconProps) => {
+  const theme = useTheme();
+
   return (
-    <div className="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700">
-      <Icon className="h-8 w-8 text-green-500 dark:text-green-400 mb-2" />
-      <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">
-        {name}
-      </span>
-    </div>
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <Card
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          p: 3,
+          height: '100%',
+          transition: 'all 0.3s ease-in-out',
+          cursor: 'pointer',
+          '&:hover': {
+            transform: 'translateY(-4px)',
+            boxShadow: theme.shadows[8],
+            borderColor: 'primary.main',
+          },
+        }}
+      >
+        <Avatar
+          sx={{
+            width: 48,
+            height: 48,
+            mb: 2,
+            backgroundColor: 'primary.main',
+          }}
+        >
+          <Icon />
+        </Avatar>
+        <Typography
+          variant="body2"
+          sx={{
+            fontWeight: 500,
+            textAlign: 'center',
+            color: 'text.primary',
+          }}
+        >
+          {name}
+        </Typography>
+      </Card>
+    </motion.div>
   );
 };
-const ProjectCard = ({
-  title,
-  description,
-  image,
-  tags,
-  link
-}) => {
+
+const ProjectCard = ({ title, description, image, tags, link }: ProjectCardProps) => {
+  const theme = useTheme();
+
   return (
-    <div className="flex-shrink-0 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700">
-      <div className="h-48 bg-gray-100 dark:bg-gray-700">
-        <img src={image} alt={title} className="w-full h-full object-cover" />
-      </div>
-      <div className="p-4">
-        <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag, index) => (
-            <span
-              key={index}
-              className="text-xs px-2 py-1 bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        {link && (
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-2 px-4 py-2 bg-green-500 text-white rounded-full font-medium shadow hover:bg-green-600 transition-colors text-sm"
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.02 }}
+    >
+      <Card
+        sx={{
+          height: '100%',
+          transition: 'all 0.3s ease-in-out',
+          cursor: 'pointer',
+          '&:hover': {
+            transform: 'translateY(-8px)',
+            boxShadow: theme.shadows[8],
+          },
+        }}
+      >
+        <Box
+          sx={{
+            height: 200,
+            overflow: 'hidden',
+            position: 'relative',
+          }}
+        >
+          <img
+            src={image}
+            alt={title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </Box>
+        <CardContent sx={{ p: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+            {title}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mb: 3, lineHeight: 1.6 }}
           >
-            View Project
-          </a>
-        )}
-      </div>
-    </div>
+            {description}
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
+            {tags.map((tag: string, index: number) => (
+              <Chip
+                key={index}
+                label={tag}
+                size="small"
+                sx={{
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  color: 'primary.main',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                }}
+              />
+            ))}
+          </Box>
+          {link && (
+            <Link
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1,
+                color: 'primary.main',
+                textDecoration: 'none',
+                fontWeight: 600,
+                '&:hover': {
+                  textDecoration: 'underline',
+                },
+              }}
+            >
+              View Project
+              <OpenInNewIcon sx={{ fontSize: 16 }} />
+            </Link>
+          )}
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
-const technicalSkills = [{
-    icon: FileCodeIcon,
-    name: 'Python'
-  }, {
-    icon: FileCodeIcon,
-    name: 'JavaScript'
-  }, {
-    icon: FileCodeIcon,
-    name: 'Java'
-  }, {
-    icon: FileCodeIcon,
-    name: 'C++'
-  }, {
-    icon: FileCodeIcon,
-    name: 'TypeScript'
-  },{
-    icon: GlobeIcon,
-    name: 'HTML/CSS'
-  }, {
-    icon: MonitorIcon,
-    name: 'React'
-  }, {
-    icon: MonitorIcon,
-    name: 'Next.js'
-  }, {
-    icon: MonitorIcon,
-    name: 'Node.js'
-  }, {
-    icon: MonitorIcon,
-    name: 'Django'
-  }, {
-    icon: MonitorIcon,
-    name: 'GraphQL'
-  }, {
-    icon: MonitorIcon,
-    name: 'MySQL'
-  }, {
-    icon: MonitorIcon,
-    name: 'PostgreSQL'
-  }, {
-    icon: DatabaseIcon,
-    name: 'MongoDB'
-  }, {
-    icon: BoxIcon,
-    name: 'Redis'
-  }, {
-    icon: CloudIcon,
-    name: 'AWS'
-  }, {
-    icon: CloudIcon,
-    name: 'Google Cloud'
-  }, {
-    icon: CloudIcon,
-    name: 'Azure'
-  }, {
-    icon: ServerIcon,
-    name: 'Docker'
-  }, {
-    icon: ServerIcon,
-    name: 'Kubernetes'
-  }, {
-    icon: SettingsIcon,
-    name: 'Terraform'
-  }, {
-    icon: SettingsIcon,
-    name: 'Jenkins'
-  }, {
-    icon: GitBranchIcon,
-    name: 'Git & GitHub'
-  }, {
-    icon: BrainIcon,
-    name: 'TensorFlow'
-  }, {
-    icon: BrainIcon,
-    name: 'PyTorch'
-  }, {
-    icon: BrainIcon,
-    name: 'Scikit-learn'
-  }, {
-    icon: BrainIcon,
-    name: 'Keras'
-  }, {
-    icon: BrainIcon,
-    name: 'Pandas'
-  }, {
-    icon: BrainIcon,
-    name: 'NumPy'
-  }, {
-    icon: BrainIcon,
-    name: 'OpenCV'
-  }, {
-    icon: MonitorIcon,
-    name: 'PowerBI'
-  },{
-    icon: CodeIcon,
-    name: 'BeautifulSoup'
-  },{
-    icon: SettingsIcon,
-    name: 'REST APIs'
-  }, {
-    icon: PanelsTopLeftIcon,
-    name: 'Agile/Scrum'
-  }, {
-    icon: PanelsTopLeftIcon,
-    name: 'WebGL (basic)'
-  }, {
-    icon: CodeIcon,
-    name: 'AJAX/jQuery'
-  }, {
-    icon: CodeIcon,
-    name: 'Figma'
-  }
+
+const technicalSkills = [
+  { icon: FileCodeIcon, name: 'Python' },
+  { icon: FileCodeIcon, name: 'JavaScript' },
+  { icon: FileCodeIcon, name: 'Java' },
+  { icon: FileCodeIcon, name: 'C++' },
+  { icon: FileCodeIcon, name: 'TypeScript' },
+  { icon: GlobeIcon, name: 'HTML/CSS' },
+  { icon: MonitorIcon, name: 'React' },
+  { icon: MonitorIcon, name: 'Next.js' },
+  { icon: MonitorIcon, name: 'Node.js' },
+  { icon: MonitorIcon, name: 'Django' },
+  { icon: MonitorIcon, name: 'GraphQL' },
+  { icon: MonitorIcon, name: 'MySQL' },
+  { icon: MonitorIcon, name: 'PostgreSQL' },
+  { icon: DatabaseIcon, name: 'MongoDB' },
+  { icon: BoxIcon, name: 'Redis' },
+  { icon: CloudIcon, name: 'AWS' },
+  { icon: CloudIcon, name: 'Google Cloud' },
+  { icon: CloudIcon, name: 'Azure' },
+  { icon: ServerIcon, name: 'Docker' },
+  { icon: ServerIcon, name: 'Kubernetes' },
+  { icon: SettingsIcon, name: 'Terraform' },
+  { icon: SettingsIcon, name: 'Jenkins' },
+  { icon: GitBranchIcon, name: 'Git & GitHub' },
+  { icon: BrainIcon, name: 'TensorFlow' },
+  { icon: BrainIcon, name: 'PyTorch' },
+  { icon: BrainIcon, name: 'Scikit-learn' },
+  { icon: BrainIcon, name: 'Keras' },
+  { icon: BrainIcon, name: 'Pandas' },
+  { icon: BrainIcon, name: 'NumPy' },
+  { icon: BrainIcon, name: 'OpenCV' },
+  { icon: MonitorIcon, name: 'PowerBI' },
+  { icon: CodeIcon, name: 'BeautifulSoup' },
+  { icon: SettingsIcon, name: 'REST APIs' },
+  { icon: PanelsTopLeftIcon, name: 'Agile/Scrum' },
+  { icon: PanelsTopLeftIcon, name: 'WebGL (basic)' },
+  { icon: CodeIcon, name: 'AJAX/jQuery' },
+  { icon: CodeIcon, name: 'Figma' },
 ];
 
 const Skills = () => {
   const [showAllSkills, setShowAllSkills] = useState(false);
-  const conciseCount = 10;
+  const [activeTab, setActiveTab] = useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const conciseCount = 12;
   const conciseSkills = technicalSkills.slice(0, conciseCount);
   const skillsToShow = showAllSkills ? technicalSkills : conciseSkills;
 
-
-  const projects = [{
+  const projects = [
+    {
       title: 'SmartSplit - AI-Powered Bill Splitting App',
-      description: 'A smart bill-splitting app built for GDG BuildAthon that uses OCR and Firebase to scan receipts, assign items to people, and calculate shared costs with tax and tip. Real-time updates and an intuitive UI make group payments seamless.',
+      description:
+        'A smart bill-splitting app built for GDG BuildAthon that uses OCR and Firebase to scan receipts, assign items to people, and calculate shared costs with tax and tip. Real-time updates and an intuitive UI make group payments seamless.',
       image: 'https://raw.githubusercontent.com/github-pratik/smafrt_splitter_GDG/main/Demo1.gif',
       tags: ['React', 'TypeScript', 'TailwindCSS', 'Firebase', 'OCR', 'Lucide React', 'Vite'],
-      link: 'https://github.com/github-pratik/smafrt_splitter_GDG'
-    }, {
+      link: 'https://github.com/github-pratik/smafrt_splitter_GDG',
+    },
+    {
       title: 'Smart Clipboard Manager - Chrome Extension',
-      description: 'A privacy-first, manual clipboard manager Chrome extension with a minimal, modern UI and local AI features. Features include smart tagging, categorization, summarization, and semantic search—all running locally for privacy.',
-      image: 'https://i.imgur.com/JmSn4.giff', // You may want to add a specific demo image
+      description:
+        'A privacy-first, manual clipboard manager Chrome extension with a minimal, modern UI and local AI features. Features include smart tagging, categorization, summarization, and semantic search—all running locally for privacy.',
+      image: 'https://i.imgur.com/JmSn4.gif',
       tags: ['JavaScript', 'Chrome Extension', 'AI', 'Privacy', 'Local Storage', 'Manifest V3'],
-      link: 'https://github.com/github-pratik/Smart-Clipboard-Manager'
-    }, {
+      link: 'https://github.com/github-pratik/Smart-Clipboard-Manager',
+    },
+    {
       title: 'Edulearn Bolt - AI-Powered Learning Platform',
-      description: 'A community-driven, open-source platform empowering educators and students with accessible learning resources, optional premium content, and AI-powered features. Built for Bolt.new Hackathon 2025.',
-      image: 'https://i.imgur.com/Zp4at4.gif', // You may want to add a specific demo image
+      description:
+        'A community-driven, open-source platform empowering educators and students with accessible learning resources, optional premium content, and AI-powered features. Built for Bolt.new Hackathon 2025.',
+      image: 'https://i.imgur.com/Zp4at4.gif',
       tags: ['TypeScript', 'Supabase', 'AI Chat', 'Voice AI', 'OpenRouter', 'RevenueCat'],
-      link: 'https://github.com/github-pratik/Edulearn_Bolt'
-    }, {
+      link: 'https://github.com/github-pratik/Edulearn_Bolt',
+    },
+    {
       title: 'Instant Market - GMU Student Marketplace',
-      description: 'A campus-focused e-commerce platform for GMU students to buy and sell essentials like textbooks and electronics. Features include user roles, AI-powered recommendations, receipt generation, and sales analytics dashboard.',
+      description:
+        'A campus-focused e-commerce platform for GMU students to buy and sell essentials like textbooks and electronics. Features include user roles, AI-powered recommendations, receipt generation, and sales analytics dashboard.',
       image: 'https://i.imgur.com/JmSbSn4.gif',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap 5', 'LocalStorage', 'SessionStorage', 'AI Recommendation'],
-      link: 'https://github.com/github-pratik/GMU_Instant_Market'
+      link: 'https://github.com/github-pratik/GMU_Instant_Market',
     },
     {
       title: 'Real-Time Speech Analytics Dashboard',
-      description: 'An advanced dashboard for real-time speech analysis with sentiment detection, emotion recognition, and speech-to-text capabilities. Provides comprehensive analytics and insights.',
-      image: 'https://i.imgur.com/YyTqE1.gif', // You may want to add a specific demo image
+      description:
+        'An advanced dashboard for real-time speech analysis with sentiment detection, emotion recognition, and speech-to-text capabilities. Provides comprehensive analytics and insights.',
+      image: 'https://i.imgur.com/YyTqE1.gif',
       tags: ['React', 'WebRTC', 'Speech Recognition', 'Sentiment Analysis', 'Real-time Analytics'],
-      link: 'https://github.com/github-pratik/Real-Time-Speech-Analytics-Dashboard'
-    }, {
+      link: 'https://github.com/github-pratik/Real-Time-Speech-Analytics-Dashboard',
+    },
+    {
       title: 'Homework Grader - AI-Powered Grading System',
-      description: 'An intelligent homework grading system that uses AI to automatically evaluate student submissions, provide feedback, and generate detailed reports for educators.',
-      image: 'https://imgur.com/A6jvDV.gif', // You may want to add a specific demo image
+      description:
+        'An intelligent homework grading system that uses AI to automatically evaluate student submissions, provide feedback, and generate detailed reports for educators.',
+      image: 'https://imgur.com/A6jvDV.gif',
       tags: ['Python', 'AI/ML', 'Natural Language Processing', 'Education Tech', 'Automation'],
-      link: 'https://github.com/github-pratik/HomeworkGrader'
-    }, {
+      link: 'https://github.com/github-pratik/HomeworkGrader',
+    },
+    {
       title: 'UI Coding Assistant - AI-Powered Dev Tool',
-      description: 'A prototype tool for GMU SWE632 that assists UI developers in generating components, analyzing design/code, and checking accessibility. Includes simulated AI suggestions, performance evaluation, and WCAG testing.',
+      description:
+        'A prototype tool for GMU SWE632 that assists UI developers in generating components, analyzing design/code, and checking accessibility. Includes simulated AI suggestions, performance evaluation, and WCAG testing.',
       image: 'https://i.imgur.com/YxyTqE1.gif',
       tags: ['JavaScript', 'HTML5', 'CSS3', 'jQuery', 'Bootstrap 5', 'Jest', 'Selenium', 'Prism.js'],
-      link: 'https://github.com/github-pratik/UICoding_assistant'
-    }, {
+      link: 'https://github.com/github-pratik/UICoding_assistant',
+    },
+    {
       title: 'Java Oracle University DB - GMU GUI',
-      description: 'A comprehensive Java application with Oracle database integration for university management. Features a modern GUI for managing student records, courses, and academic data.',
-      image: 'https://github.com/github-pratik/Wb_Scraping_and_Classification/assets/90708235/14e0b9fd-9f83-4081-b431-22a6254c66cf', // You may want to add a specific demo image
+      description:
+        'A comprehensive Java application with Oracle database integration for university management. Features a modern GUI for managing student records, courses, and academic data.',
+      image: 'https://github.com/github-pratik/Wb_Scraping_and_Classification/assets/90708235/14e0b9fd-9f83-4081-b431-22a6254c66cf',
       tags: ['Java', 'Oracle Database', 'Swing GUI', 'JDBC', 'Database Design'],
-      link: 'https://github.com/github-pratik/Java_Oracle_UniversityDB_GMU_GUI'
-    }, {
+      link: 'https://github.com/github-pratik/Java_Oracle_UniversityDB_GMU_GUI',
+    },
+    {
       title: 'Crewmate - Database Management with Supabase',
-      description: 'A modern database management application built with Supabase for efficient data handling, real-time updates, and scalable backend operations.',
-      image: 'https://i.imgur.com/JmSSn4.gif', // You may want to add a specific demo image
+      description:
+        'A modern database management application built with Supabase for efficient data handling, real-time updates, and scalable backend operations.',
+      image: 'https://i.imgur.com/JmSSn4.gif',
       tags: ['Supabase', 'React', 'TypeScript', 'Database Management', 'Real-time'],
-      link: 'https://github.com/github-pratik/Crewmate_DBSupabase'
-    }, 
+      link: 'https://github.com/github-pratik/Crewmate_DBSupabase',
+    },
     {
       title: 'Pokémon Dashboard - React + PokéAPI',
-      description: 'An interactive React-based dashboard that fetches and displays data from the PokéAPI. Users can search, filter, and view detailed Pokémon info with charts highlighting unique data insights.',
+      description:
+        'An interactive React-based dashboard that fetches and displays data from the PokéAPI. Users can search, filter, and view detailed Pokémon info with charts highlighting unique data insights.',
       image: 'https://i.imgur.com/gZp4at4.gif',
       tags: ['React', 'PokéAPI', 'Data Visualization', 'Charts', 'Routing'],
-      link: 'https://github.com/github-pratik/CodePath_Dasboard_part-2'
-    }, {
+      link: 'https://github.com/github-pratik/CodePath_Dasboard_part-2',
+    },
+    {
       title: "Trippin' on Cats - Cat Discovery App",
-      description: "A fun and interactive cat breed explorer that fetches random cats via API. Users can ban unwanted traits, keep a visual history of seen cats, and enjoy a sleek glass-style UI with responsive design.",
+      description:
+        "A fun and interactive cat breed explorer that fetches random cats via API. Users can ban unwanted traits, keep a visual history of seen cats, and enjoy a sleek glass-style UI with responsive design.",
       image: "https://imgur.com/A6jJvDV.gif",
       tags: ['JavaScript', 'Async/Await', 'API Integration', 'CSS Effects', 'Responsive Design'],
-      link: "https://github.com/github-pratik/CodePath-week5-trippin-on-Cats"
-    },   {
+      link: "https://github.com/github-pratik/CodePath-week5-trippin-on-Cats",
+    },
+    {
       title: 'Web Scraping and News Classification',
-      description: 'Python-based project that scrapes news articles and classifies them using KNN and SVM models. Includes data preprocessing, cross-validation, and visualization of classification performance.',
+      description:
+        'Python-based project that scrapes news articles and classifies them using KNN and SVM models. Includes data preprocessing, cross-validation, and visualization of classification performance.',
       image: 'https://github.com/github-pratik/Web_Scraping_and_Classification/assets/90708235/14e0b9fd-9f83-4081-b431-22a6254c66cf',
       tags: ['Python', 'BeautifulSoup', 'Scikit-learn', 'KNN', 'SVM', 'Pandas', 'NLTK'],
-      link: 'https://github.com/github-pratik/Web_Scraping_and_Classification'
-    }];
-  
-  // ... existing code ...;
+      link: 'https://github.com/github-pratik/Web_Scraping_and_Classification',
+    },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setActiveTab(newValue);
+  };
+
   return (
-    <div className="bg-white dark:bg-black min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Skills & Projects
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          Technical expertise and recent work
-        </p>
-        <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl mb-12 border border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
-            Technical Skills
-          </h2>
-          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10 gap-4">
-            {skillsToShow.map((skill, index) => <SkillIcon key={index} icon={skill.icon} name={skill.name} />)}
-          </div>
-          {technicalSkills.length > conciseCount && (
-            <div className="flex justify-center mt-4">
-              <button
-                className="px-4 py-2 bg-green-500 text-white rounded-full font-medium shadow hover:bg-green-600 transition-colors text-sm"
-                onClick={() => setShowAllSkills((prev) => !prev)}
+    <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh', py: 8 }}>
+      <Container maxWidth="lg">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div variants={itemVariants}>
+            <Box sx={{ textAlign: 'center', mb: 8 }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontWeight: 700,
+                  background: 'linear-gradient(45deg, #10B981, #34D399)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  textAlign: 'center',
+                  mb: 1,
+                }}
               >
-                {showAllSkills ? 'Show Less' : 'Show More'}
-              </button>
-            </div>
+                Projects & Skills
+              </Typography>
+              <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+                Explore my projects and technical skills
+              </Typography>
+              <Box
+                sx={{
+                  width: 80,
+                  height: 4,
+                  backgroundColor: 'primary.main',
+                  mx: 'auto',
+                  borderRadius: 2,
+                }}
+              />
+            </Box>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Box sx={{ mb: 6 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                <Tabs
+                  value={activeTab}
+                  onChange={(e, newValue) => setActiveTab(newValue)}
+                  sx={{
+                    mb: 4,
+                    '& .MuiTabs-indicator': {
+                      backgroundColor: theme.palette.primary.main,
+                      height: 3,
+                    },
+                  }}
+                >
+                  <Tab
+                    label="Projects"
+                    sx={{
+                      color: theme.palette.text.secondary,
+                      fontWeight: 600,
+                      '&.Mui-selected': {
+                        color: theme.palette.primary.main,
+                      },
+                    }}
+                  />
+                  <Tab
+                    label="Skills"
+                    sx={{
+                      color: theme.palette.text.secondary,
+                      fontWeight: 600,
+                      '&.Mui-selected': {
+                        color: theme.palette.primary.main,
+                      },
+                    }}
+                  />
+                </Tabs>
+              </Box>
+            </Box>
+          </motion.div>
+
+          {activeTab === 0 && (
+            <motion.div variants={itemVariants}>
+              <Box>
+                <Typography variant="h4" sx={{ fontWeight: 600, mb: 4, textAlign: 'center' }}>
+                  Featured Projects
+                </Typography>
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: {
+                      xs: 'repeat(1, 1fr)',
+                      sm: 'repeat(2, 1fr)',
+                      lg: 'repeat(3, 1fr)',
+                    },
+                    gap: 4,
+                  }}
+                >
+                  {projects.map((project, index) => (
+                    <ProjectCard key={index} {...project} />
+                  ))}
+                </Box>
+              </Box>
+            </motion.div>
           )}
-        </div>
-        <div className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-            <span>Featured Projects</span>
-            <span className="inline-block px-3 py-1 bg-green-500 text-white text-xs rounded-full font-semibold ml-2">Featured</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <ProjectCard key={index} {...project} />
-            ))}
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Languages</h2>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="font-medium text-gray-700 dark:text-gray-300">JavaScipt</span>
-                <span className="text-green-500 dark:text-green-400">Native</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-medium text-gray-700 dark:text-gray-300">Java</span>
-                <span className="text-green-500 dark:text-green-400">Intermediate</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-medium text-gray-700 dark:text-gray-300">Python</span>
-                <span className="text-green-500 dark:text-green-400">Intermediate</span>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Soft Skills
-            </h2>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="flex items-center space-x-2">
-                <div className="h-2 w-2 bg-green-500 dark:bg-green-400 rounded-full"></div>
-                <span className="text-gray-700 dark:text-gray-300">Problem Solving</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="h-2 w-2 bg-green-500 dark:bg-green-400 rounded-full"></div>
-                <span className="text-gray-700 dark:text-gray-300">Team Leadership</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="h-2 w-2 bg-green-500 dark:bg-green-400 rounded-full"></div>
-                <span className="text-gray-700 dark:text-gray-300">Communication</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="h-2 w-2 bg-green-500 dark:bg-green-400 rounded-full"></div>
-                <span className="text-gray-700 dark:text-gray-300">Time Management</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+          {activeTab === 1 && (
+            <motion.div variants={itemVariants}>
+              <Box sx={{ mb: 6 }}>
+                <Typography variant="h4" sx={{ fontWeight: 600, mb: 4, textAlign: 'center' }}>
+                  Technical Skills
+                </Typography>
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: {
+                      xs: 'repeat(2, 1fr)',
+                      sm: 'repeat(3, 1fr)',
+                      md: 'repeat(4, 1fr)',
+                      lg: 'repeat(6, 1fr)',
+                    },
+                    gap: 3,
+                    mb: 4,
+                  }}
+                >
+                  {skillsToShow.map((skill, index) => (
+                    <SkillIcon key={index} {...skill} />
+                  ))}
+                </Box>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setShowAllSkills(!showAllSkills)}
+                    sx={{ minWidth: 200 }}
+                  >
+                    {showAllSkills ? 'Show Less' : 'Show All Skills'}
+                  </Button>
+                </Box>
+              </Box>
+            </motion.div>
+          )}
+        </motion.div>
+      </Container>
+    </Box>
   );
 };
+
 export default Skills;

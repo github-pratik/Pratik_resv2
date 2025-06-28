@@ -1,16 +1,53 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { Box, useTheme } from '@mui/material';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import ScrollToTop from './ScrollToTop';
+
 const Layout = () => {
-  return <div className="min-h-screen flex flex-col bg-white dark:bg-black relative">
+  const theme = useTheme();
+
+  return (
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'background.default',
+        position: 'relative',
+      }}
+    >
       {/* Grid background overlay for depth effect */}
-      <div className="absolute inset-0 pointer-events-none bg-grid-pattern dark:bg-grid-pattern-dark opacity-30 z-0"></div>
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          opacity: 0.3,
+          zIndex: 0,
+          backgroundImage: `
+            linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '20px 20px',
+        }}
+      />
       <Navbar />
-      <main className="flex-grow relative z-10">
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
         <Outlet />
-      </main>
+      </Box>
       <Footer />
-    </div>;
+      <ScrollToTop />
+    </Box>
+  );
 };
+
 export default Layout;

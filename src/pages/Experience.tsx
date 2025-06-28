@@ -1,5 +1,45 @@
 import React from 'react';
-import { CalendarIcon, MapPinIcon } from 'lucide-react';
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Box,
+  Chip,
+  Grid,
+  useTheme,
+  useMediaQuery,
+  Avatar,
+  Divider,
+  Link,
+} from '@mui/material';
+import {
+  Work as WorkIcon,
+  CalendarToday as CalendarIcon,
+  LocationOn as LocationIcon,
+  Code as CodeIcon,
+  GitHub as GitHubIcon,
+  OpenInNew as OpenInNewIcon,
+} from '@mui/icons-material';
+import { motion } from 'framer-motion';
+
+interface ExperienceItemProps {
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  description: string[];
+  technologies: string[];
+}
+
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  link: string;
+}
+
 const ExperienceItem = ({
   title,
   company,
@@ -7,147 +47,355 @@ const ExperienceItem = ({
   period,
   description,
   technologies,
-}) => {
+}: ExperienceItemProps) => {
+  const theme = useTheme();
+
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-      <h3 className="text-xl font-bold text-gray-900 dark:text-white">{title}</h3>
-      <h4 className="text-lg font-medium text-green-500 dark:text-green-400 mb-2">{company}</h4>
-      <div className="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
-        <div className="flex items-center mr-4 mb-2">
-          <CalendarIcon className="h-4 w-4 mr-1" />
-          <span>{period}</span>
-        </div>
-        <div className="flex items-center mb-2">
-          <MapPinIcon className="h-4 w-4 mr-1" />
-          <span>{location}</span>
-        </div>
-      </div>
-      <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 pl-2 space-y-1">
-        {description.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-      <div className="flex flex-wrap gap-2">
-        {technologies.map((tech, index) => (
-          <span
-            key={index}
-            className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      <Card
+        sx={{
+          mb: 4,
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'translateY(-4px)',
+            boxShadow: theme.shadows[8],
+          },
+        }}
+      >
+        <CardContent sx={{ p: 4 }}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+            <Avatar
+              sx={{
+                width: 56,
+                height: 56,
+                mr: 3,
+                backgroundColor: 'primary.main',
+              }}
+            >
+              <WorkIcon />
+            </Avatar>
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
+                {title}
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: 'primary.main',
+                  fontWeight: 600,
+                  mb: 2,
+                }}
+              >
+                {company}
+              </Typography>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 3 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <CalendarIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
+                  <Typography variant="body2" color="text.secondary">
+                    {period}
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <LocationIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
+                  <Typography variant="body2" color="text.secondary">
+                    {location}
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+              Key Responsibilities:
+            </Typography>
+            <Box component="ul" sx={{ pl: 2, m: 0 }}>
+              {description.map((item: string, index: number) => (
+                <Typography
+                  key={index}
+                  component="li"
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ mb: 1 }}
+                >
+                  {item}
+                </Typography>
+              ))}
+            </Box>
+          </Box>
+
+          <Box>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              Technologies Used:
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {technologies.map((tech: string, index: number) => (
+                <Chip
+                  key={index}
+                  label={tech}
+                  size="small"
+                  sx={{
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    color: 'primary.main',
+                    border: '1px solid rgba(16, 185, 129, 0.3)',
+                  }}
+                />
+              ))}
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
-const Experience = () => {
-  const experiences = [{
-    title: 'Persistent Martian Intern',
-    company: 'Persistent Systems',
-    location: 'India',
-    period: 'June 2023 – August 2023',
-    description: [
-      'Collaborated in Agile sprints contributing to database management and application debugging.',
-      'Enhanced code efficiency by 30% through optimization and debugging under mentor guidance.',
-      'Managed large datasets using MySQL, ensuring data integrity and retrieval performance.'
-    ],
-    technologies: ['MySQL', 'Agile', 'Debugging', 'SQL']
-  }, {
-    title: 'Web Developer Intern',
-    company: 'PHN Technology',
-    location: 'India',
-    period: 'April 2023 – June 2023',
-    description: [
-      'Developed backend systems using Node.js and MongoDB, improving portfolio website management.',
-      'Integrated REST APIs, enabling real-time dynamic content updates reducing content update time by 30%.',
-      'Implemented client-side enhancements using AJAX and JavaScript.'
-    ],
-    technologies: ['Node.js', 'MongoDB', 'JavaScript', 'AJAX', 'REST API']
-  }];
-  return <div className="bg-white dark:bg-black min-h-screen py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Work Experience
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          My professional journey and contributions
-        </p>
-        <div className="space-y-8">
-          {experiences.map((exp, index) => <ExperienceItem key={index} {...exp} />)}
-        </div>
-        <div className="mt-12 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-900">
-              <div className="h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                <img src="https://i.imgur.com/JmSbSn4.gif" alt="AI Sentiment Analysis Tool" className="w-full h-full object-cover" />
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">
-                Instant Market - GMU Student Marketplace
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                A campus-focused e-commerce platform for GMU students to buy and sell essentials like textbooks and electronics. Features include user roles, AI-powered recommendations, receipt generation, and sales analytics dashboard.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  HTML5
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  CSS3
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  JavaScript
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  Bootstrap 5
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  LocalStorage
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  SessionStorage
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  AI Recommendation
-                  </span>
-                </div>
-                <a href="https://github.com/github-pratik/GMU_Instant_Market" className="text-green-500 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300">
-                  View Project →
-                </a>
-              </div>
-            </div>
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-900">
-              <div className="h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                <img src="https://i.imgur.com/gZp4at4.gif" alt="E-commerce Platform" className="w-full h-full object-cover" />
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Pokémon Dashboard - React + PokéAPI</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                An interactive React-based dashboard that fetches and displays data from the PokéAPI. Users can search, filter, and view detailed Pokémon info with charts highlighting unique data insights.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                    React
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  Data Visualization
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  PokéAPI
-                  </span>
-                  <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
-                  Routing
-                  </span>
-                </div>
-                <a href="https://github.com/github-pratik/CodePath_Dasboard_part-2" className="text-green-500 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300">
-                  View Project →
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>;
+
+const ProjectCard = ({ title, description, image, tags, link }: ProjectCardProps) => {
+  const theme = useTheme();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.02 }}
+    >
+      <Card
+        sx={{
+          height: '100%',
+          transition: 'all 0.3s ease-in-out',
+          cursor: 'pointer',
+          '&:hover': {
+            transform: 'translateY(-8px)',
+            boxShadow: theme.shadows[8],
+          },
+        }}
+      >
+        <Box
+          sx={{
+            height: 200,
+            overflow: 'hidden',
+            position: 'relative',
+          }}
+        >
+          <img
+            src={image}
+            alt={title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </Box>
+        <CardContent sx={{ p: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+            {title}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mb: 3, lineHeight: 1.6 }}
+          >
+            {description}
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
+            {tags.map((tag: string, index: number) => (
+              <Chip
+                key={index}
+                label={tag}
+                size="small"
+                sx={{
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  color: 'primary.main',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                }}
+              />
+            ))}
+          </Box>
+          <Link
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 1,
+              color: 'primary.main',
+              textDecoration: 'none',
+              fontWeight: 600,
+              '&:hover': {
+                textDecoration: 'underline',
+              },
+            }}
+          >
+            View Project
+            <OpenInNewIcon sx={{ fontSize: 16 }} />
+          </Link>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
 };
+
+const Experience = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const experiences = [
+    {
+      title: 'Persistent Martian Intern',
+      company: 'Persistent Systems',
+      location: 'India',
+      period: 'June 2023 – August 2023',
+      description: [
+        'Collaborated in Agile sprints contributing to database management and application debugging.',
+        'Enhanced code efficiency by 30% through optimization and debugging under mentor guidance.',
+        'Managed large datasets using MySQL, ensuring data integrity and retrieval performance.',
+      ],
+      technologies: ['MySQL', 'Agile', 'Debugging', 'SQL'],
+    },
+    {
+      title: 'Web Developer Intern',
+      company: 'PHN Technology',
+      location: 'India',
+      period: 'April 2023 – June 2023',
+      description: [
+        'Developed backend systems using Node.js and MongoDB, improving portfolio website management.',
+        'Integrated REST APIs, enabling real-time dynamic content updates reducing content update time by 30%.',
+        'Implemented client-side enhancements using AJAX and JavaScript.',
+      ],
+      technologies: ['Node.js', 'MongoDB', 'JavaScript', 'AJAX', 'REST API'],
+    },
+  ];
+
+  const projects = [
+    {
+      title: 'Instant Market - GMU Student Marketplace',
+      description:
+        'A campus-focused e-commerce platform for GMU students to buy and sell essentials like textbooks and electronics. Features include user roles, AI-powered recommendations, receipt generation, and sales analytics dashboard.',
+      image: 'https://i.imgur.com/JmSbSn4.gif',
+      tags: [
+        'HTML5',
+        'CSS3',
+        'JavaScript',
+        'Bootstrap 5',
+        'LocalStorage',
+        'SessionStorage',
+        'AI Recommendation',
+      ],
+      link: 'https://github.com/github-pratik/GMU_Instant_Market',
+    },
+    {
+      title: 'Pokémon Dashboard - React + PokéAPI',
+      description:
+        'An interactive React-based dashboard that fetches and displays data from the PokéAPI. Users can search, filter, and view detailed Pokémon info with charts highlighting unique data insights.',
+      image: 'https://i.imgur.com/gZp4at4.gif',
+      tags: ['React', 'Data Visualization', 'PokéAPI', 'Routing'],
+      link: 'https://github.com/github-pratik/CodePath_Dasboard_part-2',
+    },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+
+  return (
+    <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh', py: 8 }}>
+      <Container maxWidth="lg">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div variants={itemVariants}>
+            <Box sx={{ textAlign: 'center', mb: 8 }}>
+              <Typography variant="h2" sx={{ fontWeight: 700, mb: 2 }}>
+                Work Experience
+              </Typography>
+              <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+                My professional journey and contributions
+              </Typography>
+              <Box
+                sx={{
+                  width: 80,
+                  height: 4,
+                  backgroundColor: 'primary.main',
+                  mx: 'auto',
+                  borderRadius: 2,
+                }}
+              />
+            </Box>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Box sx={{ mb: 8 }}>
+              {experiences.map((exp, index) => (
+                <ExperienceItem key={index} {...exp} />
+              ))}
+            </Box>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <Card sx={{ mb: 8 }}>
+              <CardContent sx={{ p: 4 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
+                  <Avatar
+                    sx={{
+                      width: 48,
+                      height: 48,
+                      mr: 2,
+                      backgroundColor: 'primary.main',
+                    }}
+                  >
+                    <CodeIcon />
+                  </Avatar>
+                  <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                    Featured Projects
+                  </Typography>
+                </Box>
+                <Divider sx={{ mb: 4 }} />
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                  {projects.map((project, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        flex: { xs: '1 1 100%', md: '1 1 calc(50% - 32px)' },
+                      }}
+                    >
+                      <ProjectCard {...project} />
+                    </Box>
+                  ))}
+                </Box>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </motion.div>
+      </Container>
+    </Box>
+  );
+};
+
 export default Experience;
