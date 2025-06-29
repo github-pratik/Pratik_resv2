@@ -5,7 +5,7 @@ A modern, fully responsive portfolio and resume web application built with React
 ## Live Demo
 [https://pratik-resv2.vercel.app/](https://pratik-resv2.vercel.app/)
 
-![Demo GIF](resume2.gif)
+![Demo GIF](https://imgur.com/a/871OHza.gif)
 
 ## ✨ Features
 
